@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ENCUESTA</title>
+  <title>Sorpresa 😈</title>
   <style>
     body {
       margin: 0;
@@ -32,14 +32,29 @@
 
   <button id="btn">TOCA AQUÍ</button>
 
-  <audio id="audio" src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3fdf8da08d.mp3?filename=scream-199729.mp3"></audio>
+  <audio id="audio">
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_3fdf8da08d.mp3?filename=scream-199729.mp3" type="audio/mpeg">
+  </audio>
 
   <script>
     const btn = document.getElementById("btn");
     const audio = document.getElementById("audio");
 
+    // TRUCO: activar audio antes silenciosamente para desbloquear autoplay
+    document.addEventListener("click", firstInteraction, { once: true });
+
+    function firstInteraction() {
+      audio.volume = 1.0;
+      audio.muted = false;
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      });
+    }
+
     btn.addEventListener("click", () => {
       audio.play();
+
       btn.style.display = "none";
 
       setTimeout(() => {
@@ -51,3 +66,4 @@
 
 </body>
 </html>
+
